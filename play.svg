@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="22px" viewBox="0 0 18 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>Path 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="132 372 132 392 148 382"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Artboard" transform="translate(-131.000000, -371.000000)">
+            <g id="Path-2">
+                <use fill="#869196" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <path stroke="#869196" stroke-width="1" d="M131.5,371.097876 L148.943398,382 L131.5,392.902124 L131.5,371.097876 Z"></path>
+            </g>
+        </g>
+    </g>
+</svg>

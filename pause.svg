@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="22px" viewBox="0 0 20 22" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 45.2 (43514) - http://www.bohemiancoding.com/sketch -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="6" height="20"></rect>
+        <rect id="path-2" x="12" y="0" width="6" height="20"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round">
+        <g id="Artboard" transform="translate(-159.000000, -371.000000)">
+            <g id="Group" transform="translate(160.000000, 372.000000)">
+                <g id="Rectangle">
+                    <use fill="#869196" fill-rule="evenodd" xlink:href="#path-1"></use>
+                    <rect stroke="#869196" stroke-width="1" x="-0.5" y="-0.5" width="7" height="21"></rect>
+                </g>
+                <g id="Rectangle-Copy">
+                    <use fill="#869196" fill-rule="evenodd" xlink:href="#path-2"></use>
+                    <rect stroke="#869196" stroke-width="1" x="11.5" y="-0.5" width="7" height="21"></rect>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style media="screen">
+      body {
+        margin: 0;
+        height: 100vh;
+        background: rgba(244,248,248,1);
+        background: -moz-linear-gradient(top, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
+        background: -webkit-linear-gradient(top, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
+        background: -o-linear-gradient(top, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
+        background: linear-gradient(to bottom, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
+      }
+      #play_button, #pause_button {
+        cursor: pointer;
+        &:hover {
+            fill: red;
+        }
+      }
+      .window {
+        width: 400px;
+        height: 250px;
+        margin: 0 auto;
+        border-radius: 12px;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all 1s ease;
+        box-shadow: #aeb8bd 0 10px 30px;
+        background: rgba(255,255,255,1);
+        background: -moz-linear-gradient(top, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
+        background: -webkit-linear-gradient(top, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
+        background: -o-linear-gradient(top, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
+        background: linear-gradient(to bottom, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
+        cursor: pointer;
+      }
+      .window.playing {
+        box-shadow : #DB7689 0 20px 40px 5px;
+        /*-webkit-animation: window_bounce  1.5s infinite;*/
+      }
+      .equalizer {
+        position: relative;
+        margin: 0 auto;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 26px;
+        height: 30px;
+      }
+      .equalizer .equalizer_bar {
+        width: 3px;
+        height: 1px;
+        background-color: #fff;
+        border-radius: 6px;
+        display: inline-block;
+        vertical-align: middle;
+        transition: all 1s ease;
+      }
+      #equalizer_bar1 {
+        height: 5px;
+      }
+      #equalizer_bar2 {
+        height: 5px;
+      }
+      #equalizer_bar3 {
+        height: 5px;
+      }
+      #equalizer_bar4 {
+        height: 5px;
+      }
+      #equalizer_bar1.play {
+        -webkit-animation: equalizer_bar1  1s infinite;
+      }
+      #equalizer_bar2.play {
+        -webkit-animation: equalizer_bar2  1s infinite;
+      }
+      #equalizer_bar3.play {
+        -webkit-animation: equalizer_bar3  1s infinite;
+      }
+      #equalizer_bar4.play {
+        -webkit-animation: equalizer_bar4  1s infinite;
+      }
+
+
+      @-webkit-keyframes equalizer_bar1 {
+        0%   { height: 10px; }
+        40%  { height: 15px; }
+        60%  { height: 8px; }
+        100% { height: 12px; }
+      }
+      @-webkit-keyframes equalizer_bar2 {
+        0%   { height: 20px; }
+        50%  { height: 10px; }
+        100% { height: 20px; }
+      }
+      @-webkit-keyframes equalizer_bar3 {
+        0%   { height: 15px; }
+        40%  { height: 10px; }
+        60%  { height: 20px; }
+        100% { height: 15px; }
+      }
+      @-webkit-keyframes equalizer_bar4 {
+        0%   { height: 7px;  }
+        40%  { height: 12px; }
+        60%  { height: 10px; }
+        100% { height: 15px; }
+      }
+      @-webkit-keyframes window_bounce {
+        0%   { top: 35%; -webkit-transform:scale(1.01); box-shadow: #aeb8bd 0 13px 33px; }
+        40%  { top: 35%; -webkit-transform:scale(1.005); box-shadow: #aeb8bd 0 11px 31px; }
+        /*60%  { top: 35%; -webkit-transform:scale(1.015); box-shadow: #aeb8bd 0 15px 35px; }*/
+        100% { top: 35%; -webkit-transform:scale(1.003); box-shadow: #aeb8bd 0 12px 32px; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="window">
+      <div class="equalizer">
+        <div id="equalizer_bar1" class="equalizer_bar"></div>
+        <div id="equalizer_bar2" class="equalizer_bar"></div>
+        <div id="equalizer_bar3" class="equalizer_bar"></div>
+        <div id="equalizer_bar4" class="equalizer_bar"></div>
+        <script type="text/javascript">
+          var rand = Math.floor(Math.random() * (6 - 1)) + 1;
+
+        </script>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      // Inject YouTube API script
+      var tag = document.createElement('script');
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+      var player;
+
+      function onYouTubeIframeAPIReady() {
+        // create the global player from the specific iframe (#video)
+        player = new YT.Player('video', {
+          height: '0',
+          width: '0',
+          videoId: '1mD8w_MNBCc',
+          events: {
+            // call this function when player is ready to use
+            'onReady': onPlayerReady
+          }
+        });
+      }
+      var is_playing = false;
+      function onPlayerReady(event) {
+        // bind events
+        var play_button_role = document.getElementsByClassName('window')[0]
+        play_button_role.addEventListener("click", function() {
+            if (is_playing == false) {
+              player.playVideo();
+              is_playing = true;
+              console.log(is_playing);
+              play_button_role.classList.add('playing')
+              for (i=1; i<5; i++) {
+                document.getElementById('equalizer_bar'+i).classList.add('play')
+              }
+            }
+            else {
+              player.pauseVideo()
+              is_playing = false;
+              console.log(is_playing);
+              play_button_role.classList.remove('playing')
+              for (i=1; i<5; i++) {
+                document.getElementById('equalizer_bar'+i).classList.remove('play')
+              }
+            }
+          }
+        )
+      }
+    </script>
+    <div id="video"></div>
+  </body>
+</html>
