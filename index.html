@@ -13,20 +13,62 @@
         background: -o-linear-gradient(top, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
         background: linear-gradient(to bottom, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
       }
-      #play_button, #pause_button {
-        cursor: pointer;
-        &:hover {
-            fill: red;
-        }
+      nav {
+        margin: 0;
+      }
+      nav .view_list {
+        width: 48px;
+        height: 48px;
+        display: inline-block;
+      }
+      nav .view_list .bar_wrapper {
+        margin: 16px;
+      }
+      nav .view_list .bar {
+        height: 3px;
+        width: 24px;
+        background-color: #aeb8bd;
+        border-radius: 10px;
+        margin-bottom: 4px;
+      }
+      nav .view_list #bar3 {
+        width: 16px;
+      }
+      nav .fanic {
+        color: #aeb8bd;
+        font-family: "Helvetica Neue";
+        font-size: 24px;
+        font-weight: bold;
+        display: inline-block;
+        vertical-align: top;
+        line-height: 48px;
+      }
+      .content {
+        margin: 0 auto;
+        position: relative;
+        top: calc(50% - 48px);
+        transform: translateY(-50%);
+        width: auto;
+      }
+      .star_name {
+        color: #939499;
+        /*757780*/
+        font-family: "Helvetica Neue";
+        font-size: 36px;
+        font-weight: bold;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        width: 400px;
+        transition: all 1s ease;
+      }
+      .star_name.play {
+        color: #C4C5CC;
       }
       .window {
         width: 400px;
         height: 250px;
-        margin: 0 auto;
         border-radius: 12px;
-        position: relative;
-        top: 50%;
-        transform: translateY(-50%);
+        margin: 0 auto;
         transition: all 1s ease;
         box-shadow: #aeb8bd 0 10px 30px;
         background: rgba(255,255,255,1);
@@ -36,8 +78,11 @@
         background: linear-gradient(to bottom, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
         cursor: pointer;
       }
+      .window:hover {
+        box-shadow : #9D9D9D 0 15px 45px 5px;
+      }
       .window.playing {
-        box-shadow : #B9B9B9 0 15px 45px 5px;
+        box-shadow : #9D9D9D 0 15px 45px 5px;
         /*-webkit-animation: window_bounce  1.5s infinite;*/
       }
       .equalizer {
@@ -115,18 +160,32 @@
     </style>
   </head>
   <body>
-    <div class="window">
-      <div class="equalizer">
-        <div id="equalizer_bar1" class="equalizer_bar"></div>
-        <div id="equalizer_bar2" class="equalizer_bar"></div>
-        <div id="equalizer_bar3" class="equalizer_bar"></div>
-        <div id="equalizer_bar4" class="equalizer_bar"></div>
-        <script type="text/javascript">
-          var rand = Math.floor(Math.random() * (6 - 1)) + 1;
-
-        </script>
+    <nav>
+      <div class="view_list">
+        <div class="bar_wrapper">
+          <div class="bar" id="bar1"></div>
+          <div class="bar" id="bar2"></div>
+          <div class="bar" id="bar3"></div>
+        </div>
+      </div>
+      <div class="fanic">
+        Fanic
+      </div>
+    </nav>
+    <div class="content">
+      <div class="star_name">
+        Park Hyoshin
+      </div>
+      <div class="window">
+        <div class="equalizer">
+          <div id="equalizer_bar1" class="equalizer_bar"></div>
+          <div id="equalizer_bar2" class="equalizer_bar"></div>
+          <div id="equalizer_bar3" class="equalizer_bar"></div>
+          <div id="equalizer_bar4" class="equalizer_bar"></div>
+        </div>
       </div>
     </div>
+
 
     <script type="text/javascript">
       // Inject YouTube API script
@@ -157,8 +216,8 @@
             if (is_playing == false) {
               player.playVideo();
               is_playing = true;
-              console.log(is_playing);
               play_button_role.classList.add('playing')
+              document.getElementsByClassName('star_name')[0].classList.add('play')
               for (i=1; i<5; i++) {
                 document.getElementById('equalizer_bar'+i).classList.add('play')
               }
@@ -166,8 +225,8 @@
             else {
               player.pauseVideo()
               is_playing = false;
-              console.log(is_playing);
               play_button_role.classList.remove('playing')
+              document.getElementsByClassName('star_name')[0].classList.remove('play')
               for (i=1; i<5; i++) {
                 document.getElementById('equalizer_bar'+i).classList.remove('play')
               }
