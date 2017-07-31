@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="./animation.css">
     <style media="screen">
       body {
         margin: 0;
@@ -16,37 +18,44 @@
       nav {
         margin: 0;
       }
+      nav .view_list_fanic {
+        width: 8rem;
+      }
+      nav .view_list_fanic.hover {
+        background-color: #000;
+      }
       nav .view_list {
-        width: 48px;
-        height: 48px;
+        width: 3rem;
+        height: 3rem;
         display: inline-block;
       }
       nav .view_list .bar_wrapper {
-        margin: 16px;
+        margin: 1rem;
       }
       nav .view_list .bar {
         height: 3px;
-        width: 24px;
+        width: 1.5rem;
         background-color: #aeb8bd;
         border-radius: 10px;
         margin-bottom: 4px;
       }
-      nav .view_list #bar3 {
-        width: 16px;
+      nav .view_list #view_list_bar3 {
+        width: 1rem;
       }
       nav .fanic {
         color: #aeb8bd;
         font-family: "Helvetica Neue";
-        font-size: 24px;
+        font-size: 1.5rem;
         font-weight: bold;
         display: inline-block;
         vertical-align: top;
-        line-height: 48px;
+        line-height: 3rem;
+        cursor: normal;
       }
       .content {
         margin: 0 auto;
         position: relative;
-        top: calc(50% - 48px);
+        top: calc(50% - 3rem);
         transform: translateY(-50%);
         width: auto;
       }
@@ -58,19 +67,21 @@
         font-weight: bold;
         margin: 0 auto;
         margin-bottom: 20px;
-        width: 400px;
+        width: 25rem;
         transition: all 1s ease;
       }
       .star_name.play {
         color: #C4C5CC;
       }
       .window {
-        width: 400px;
-        height: 250px;
-        border-radius: 12px;
+        width: 25rem;
+        height: 15.625rem;
+        border-radius: 0.75rem;
         margin: 0 auto;
-        transition: all 1s ease;
+        transition: box-shadow 1s ease,
+                    filter 0.4s ease;
         box-shadow: #aeb8bd 0 10px 30px;
+        border: 1px solid rgba(255,255,255,0);
         background: rgba(255,255,255,1);
         background: -moz-linear-gradient(top, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
         background: -webkit-linear-gradient(top, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
@@ -79,7 +90,7 @@
         cursor: pointer;
       }
       .window:hover {
-        box-shadow : #9D9D9D 0 15px 45px 5px;
+        border: 3px solid #fff;
       }
       .window.playing {
         box-shadow : #9D9D9D 0 15px 45px 5px;
@@ -95,82 +106,140 @@
       }
       .equalizer .equalizer_bar {
         width: 3px;
-        height: 1px;
+        height: 5px;
         background-color: #fff;
         border-radius: 6px;
         display: inline-block;
         vertical-align: middle;
         transition: all 1s ease;
       }
-      #equalizer_bar1 {
+      .control_bar {
+        margin: 0 auto;
+        width: 18.75rem;
+      }
+      #progress_bar {
+        opacity: 0;
+      }
+      #progress_bar.play {
+        opacity: 1;
+      }
+      input[type=range] {
+        height: 22px;
+        -webkit-appearance: none;
+        margin: auto;
+        margin: 2em 0 0 0;
+        width: 100%;
+        background-color: rgba(255,255,255,0);
+        transition: all 1s ease;
+      }
+      input[type=range]:focus {
+        outline: none;
+      }
+      input[type=range]::-webkit-slider-thumb {
+        box-shadow: 0px 1px 5px #aeb8bd;
+        border: 0px solid #000000;
+        height: 0.5rem;
+        width: 0.5rem;
+        border-radius: 1.5rem;
+        background: rgba(215,47,78,1);
+        cursor: pointer;
+        -webkit-appearance: none;
+        margin-top: -3px;
+        transition: all 0.4s ease;
+      }
+      input[type=range]::-webkit-slider-thumb:hover {
+        width: 1rem;
+        height: 1rem;
+        margin-top: -6px;
+        margin-left: -3px;
+        box-shadow: 0 3px 5px #aeb8bd;
+      }
+      input[type=range]::-moz-range-thumb {
+        box-shadow: 1px 1px 1px #aeb8bd;
+        border: 0px solid #000000;
+        height: 0.5rem;
+        width: 0.5rem;
+        border-radius: 1.5rem;
+        background: rgba(215,47,78,1);
+        cursor: pointer;
+        transition: all 0.4s ease;
+      }
+      input[type=range]::-moz-range-thumb:hover {
+        width: 1rem;
+        height: 1rem;
+        margin-top: -0.5rem;
+        margin-left: -0.25rem;
+      }
+      input[type=range]::-ms-thumb {
+        margin-top: 1px;
+        box-shadow: 1px 1px 1px #aeb8bd;
+        border: 0px solid #000000;
+        height: 0.5rem;
+        width: 0.5rem;
+        border-radius: 1.5rem;
+        background: rgba(215,47,78,1);
+        cursor: pointer;
+        transition: all 0.4s ease;
+      }
+      input[type=range]::-ms-thumb:hover {
+        width: 1rem;
+        height: 1rem;
+        margin-top: -6px;
+        margin-left: -3px;
+      }
+      input[type=range]::-webkit-slider-runnable-track {
+        width: 18.75rem;
+        height: 2px;
+        cursor: pointer;
+        animate: 0.2s;
+        background: #DCE2E6;
+        border-radius: 7px;
+        border: 0px solid #000000;
+        transition: all 0.4s ease;
+      }
+      input[type=range]::-webkit-slider-runnable-track:hover {
+        height: 3px;
+        margin-top: -1px;
+        background: #fff;
+        box-shadow: 0 1px 3px #DCE2E6;
+      }
+      input[type=range]::-moz-range-track {
+        width: 18.75rem;
         height: 5px;
+        cursor: pointer;
+        animate: 0.2s;
+        background: #DCE2E6;
+        border-radius: 8px;
+        border: 1px solid #000000;
       }
-      #equalizer_bar2 {
+      input[type=range]::-ms-track {
+        width: 18.75rem;
         height: 5px;
-      }
-      #equalizer_bar3 {
-        height: 5px;
-      }
-      #equalizer_bar4 {
-        height: 5px;
-      }
-      #equalizer_bar1.play {
-        -webkit-animation: equalizer_bar1  1s infinite;
-      }
-      #equalizer_bar2.play {
-        -webkit-animation: equalizer_bar2  1s infinite;
-      }
-      #equalizer_bar3.play {
-        -webkit-animation: equalizer_bar3  1s infinite;
-      }
-      #equalizer_bar4.play {
-        -webkit-animation: equalizer_bar4  1s infinite;
+        cursor: pointer;
+        animate: 0.2s;
+        background: transparent;
+        border-color: transparent;
+        color: transparent;
       }
 
-
-      @-webkit-keyframes equalizer_bar1 {
-        0%   { height: 10px; }
-        40%  { height: 15px; }
-        60%  { height: 8px; }
-        100% { height: 12px; }
-      }
-      @-webkit-keyframes equalizer_bar2 {
-        0%   { height: 20px; }
-        50%  { height: 10px; }
-        100% { height: 20px; }
-      }
-      @-webkit-keyframes equalizer_bar3 {
-        0%   { height: 15px; }
-        40%  { height: 10px; }
-        60%  { height: 20px; }
-        100% { height: 15px; }
-      }
-      @-webkit-keyframes equalizer_bar4 {
-        0%   { height: 7px;  }
-        40%  { height: 12px; }
-        60%  { height: 10px; }
-        100% { height: 15px; }
-      }
-      @-webkit-keyframes window_bounce {
-        0%   { top: 35%; -webkit-transform:scale(1.01); box-shadow: #aeb8bd 0 13px 33px; }
-        40%  { top: 35%; -webkit-transform:scale(1.005); box-shadow: #aeb8bd 0 11px 31px; }
-        /*60%  { top: 35%; -webkit-transform:scale(1.015); box-shadow: #aeb8bd 0 15px 35px; }*/
-        100% { top: 35%; -webkit-transform:scale(1.003); box-shadow: #aeb8bd 0 12px 32px; }
-      }
     </style>
   </head>
   <body>
     <nav>
-      <div class="view_list">
-        <div class="bar_wrapper">
-          <div class="bar" id="bar1"></div>
-          <div class="bar" id="bar2"></div>
-          <div class="bar" id="bar3"></div>
+      <a href="javascript:" onclick="open_view_list()" style="text-decoration: none;">
+        <div class="view_list_fanic">
+          <div class="view_list">
+            <div class="bar_wrapper">
+              <div class="bar" id="view_list_bar1"></div>
+              <div class="bar" id="view_list_bar2"></div>
+              <div class="bar" id="view_list_bar3"></div>
+            </div>
+          </div>
+          <div class="fanic">
+            Fanic
+          </div>
         </div>
-      </div>
-      <div class="fanic">
-        Fanic
-      </div>
+      </a>
     </nav>
     <div class="content">
       <div class="star_name">
@@ -183,6 +252,9 @@
           <div id="equalizer_bar3" class="equalizer_bar"></div>
           <div id="equalizer_bar4" class="equalizer_bar"></div>
         </div>
+      </div>
+      <div class="control_bar">
+        <input type="range" id="progress_bar" value="50">
       </div>
     </div>
 
@@ -201,15 +273,47 @@
         player = new YT.Player('video', {
           height: '0',
           width: '0',
-          videoId: '1mD8w_MNBCc',
+          videoId: 'mMfFNbDome8',
+          playerVars: {
+            'loop' : 1
+          },
           events: {
             // call this function when player is ready to use
-            'onReady': onPlayerReady
+            'onReady': onPlayerReady,
+            'onStateChange': onPlayerStateChange
           }
         });
       }
+      function changeBorderColor(playerStatus) {
+        var color;
+        var windowdiv = document.getElementsByClassName('window')[0]
+        if (playerStatus == -1) {
+           // unstarted = gray
+        } else if (playerStatus == 0) {
+           player.playVideo(); // ended = yellow
+        } else if (playerStatus == 1) {
+          windowdiv.style.filter = '' // playing = green
+        } else if (playerStatus == 2) {
+           // paused = red
+        } else if (playerStatus == 3) {
+          windowdiv.style.filter = 'brightness(140%) contrast(80%)'; // buffering = purple
+        } else if (playerStatus == 5) {
+          color = "#FF6DOO"; // video cued = orange
+        }
+      }
+      function onPlayerStateChange(event) {
+        changeBorderColor(event.data);
+      }
+
+
       var is_playing = false;
+
       function onPlayerReady(event) {
+        updateProgressBar();
+        player.setLoop(true);
+        time_update_interval = setInterval(function () {
+            updateProgressBar();
+        }, 1000)
         // bind events
         var play_button_role = document.getElementsByClassName('window')[0]
         play_button_role.addEventListener("click", function() {
@@ -218,21 +322,38 @@
               is_playing = true;
               play_button_role.classList.add('playing')
               document.getElementsByClassName('star_name')[0].classList.add('play')
-              for (i=1; i<5; i++) {
-                document.getElementById('equalizer_bar'+i).classList.add('play')
-              }
+              for (i=1; i<5; i++) {document.getElementById('equalizer_bar'+i).classList.add('play')}
+              for (i=1; i<4; i++) {document.getElementById('view_list_bar'+i).classList.add('play')}
+              document.getElementById('progress_bar').classList.add('play')
+
             }
             else {
               player.pauseVideo()
               is_playing = false;
               play_button_role.classList.remove('playing')
               document.getElementsByClassName('star_name')[0].classList.remove('play')
-              for (i=1; i<5; i++) {
-                document.getElementById('equalizer_bar'+i).classList.remove('play')
-              }
+              for (i=1; i<5; i++) {document.getElementById('equalizer_bar'+i).classList.remove('play')}
+              for (i=1; i<4; i++) {document.getElementById('view_list_bar'+i).classList.remove('play')}
+              document.getElementById('progress_bar').classList.remove('play')
             }
           }
         )
+      }
+      // Set progress bar
+      var progress_bar = document.getElementById('progress_bar')
+      progress_bar.addEventListener('mouseup', function(event) {
+        var newTime = player.getDuration() * (event.target.value / 100);
+        player.seekTo(newTime);
+      })
+      progress_bar.addEventListener('touchend', function(event) {
+        var newTime = player.getDuration() * (event.target.value / 100);
+        player.seekTo(newTime);
+      })
+      function updateProgressBar(){
+        progress_bar.value = (player.getCurrentTime() / player.getDuration()) * 100;
+      }
+      function open_view_list() {
+        return false;
       }
     </script>
     <div id="video"></div>

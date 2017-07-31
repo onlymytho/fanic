@@ -1,0 +1,80 @@
+nav .view_list #view_list_bar1.play {
+  -webkit-animation: view_list_bar1  1s infinite;
+}
+nav .view_list #view_list_bar2.play {
+  -webkit-animation: view_list_bar2  1s infinite;
+}
+nav .view_list #view_list_bar3.play {
+  -webkit-animation: view_list_bar3  1s infinite;
+}
+@-webkit-keyframes view_list_bar1 {
+  0%   { width: 24px; }
+  20%  { width: 20px; }
+  40%  { width: 16px; }
+  60%  { width: 24px; }``
+  80%  { width: 18px; }
+  100% { width: 22px; }
+}
+@-webkit-keyframes view_list_bar2 {
+  0%   { width: 20px; }
+  20%  { width: 24px; }
+  40%  { width: 16px; }
+  60%  { width: 20px; }
+  80%  { width: 16px; }
+  100% { width: 24px; }
+}
+@-webkit-keyframes view_list_bar3 {
+  0%   { width: 14px; }
+  20%  { width: 16px; }
+  40%  { width: 12px; }
+  60%  { width: 16px; }
+  80%  { width: 14px; }
+  100% { width: 12px; }
+}
+
+
+#equalizer_bar1.play {
+  -webkit-animation: equalizer_bar1  1s infinite;
+}
+#equalizer_bar2.play {
+  -webkit-animation: equalizer_bar2  1s infinite;
+}
+#equalizer_bar3.play {
+  -webkit-animation: equalizer_bar3  1s infinite;
+}
+#equalizer_bar4.play {
+  -webkit-animation: equalizer_bar4  1s infinite;
+}
+@-webkit-keyframes equalizer_bar1 {
+  0%   { height: 10px; }
+  20%  { height: 12px; }
+  40%  { height: 15px; }
+  60%  { height: 8px; }
+  80%  { height: 10px; }
+  100% { height: 12px; }
+}
+@-webkit-keyframes equalizer_bar2 {
+  0%   { height: 20px; }
+  50%  { height: 10px; }
+  100% { height: 20px; }
+}
+@-webkit-keyframes equalizer_bar3 {
+  0%   { height: 15px; }
+  40%  { height: 10px; }
+  60%  { height: 20px; }
+  100% { height: 15px; }
+}
+@-webkit-keyframes equalizer_bar4 {
+  0%   { height: 7px;  }
+  40%  { height: 12px; }
+  60%  { height: 10px; }
+  100% { height: 15px; }
+}
+
+
+@-webkit-keyframes window_bounce {
+  0%   { top: 35%; -webkit-transform:scale(1.01); box-shadow: #aeb8bd 0 13px 33px; }
+  40%  { top: 35%; -webkit-transform:scale(1.005); box-shadow: #aeb8bd 0 11px 31px; }
+  /*60%  { top: 35%; -webkit-transform:scale(1.015); box-shadow: #aeb8bd 0 15px 35px; }*/
+  100% { top: 35%; -webkit-transform:scale(1.003); box-shadow: #aeb8bd 0 12px 32px; }
+}
