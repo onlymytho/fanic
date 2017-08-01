@@ -177,8 +177,8 @@
       function onYouTubeIframeAPIReady() {
         // create the global player from the specific iframe (#video)
         player = new YT.Player('video', {
-          height: '0',
-          width: '0',
+          height: '1',
+          width: '1',
           playerVars: {
             'loop' : 1
           },
@@ -212,17 +212,17 @@
         global_playerStatus = event.data;
       }
       function changeBorderColor(playerStatus) {
-        if (playerStatus == -1) { // unstarted = gray
+        if (playerStatus == -1) { // unstarted
 
-        } else if (playerStatus == 0) { // ended = yellow
-
-        } else if (playerStatus == 1) { // playing = green
+        } else if (playerStatus == 0) { // ended
+          player.nextVideo()
+        } else if (playerStatus == 1) { // playing
           showPlayState()
-        } else if (playerStatus == 2) { // paused = red
+        } else if (playerStatus == 2) { // paused
           showStopState()
-        } else if (playerStatus == 3) { // buffering = purple
+        } else if (playerStatus == 3) { // buffering
           play_button_role.style.filter = 'brightness(140%) contrast(80%)';
-        } else if (playerStatus == 5) { // video cued = orange
+        } else if (playerStatus == 5) { // video cued
         }
       }
 
