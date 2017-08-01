@@ -4,154 +4,163 @@
     <meta charset="utf-8">
     <title></title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
-    <link rel="stylesheet" href="./animation.css">
-    <link rel="stylesheet" href="./input_style.css">
+    <link rel="stylesheet" href="./css/animation.css">
+    <link rel="stylesheet" href="./css/input_style.css">
+    <link rel="stylesheet" media='screen and (min-width: 500px)' href="./css/style.css">
+    <link rel="stylesheet" media='screen and (max-width: 500px)' href="./css/style_mobile.css">
     <style media="screen">
-      body {
-        margin: 0;
-        height: 100vh;
-        background: rgba(244,248,248,1);
-        background: -moz-linear-gradient(top, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
-        background: -webkit-linear-gradient(top, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
-        background: -o-linear-gradient(top, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
-        background: linear-gradient(to bottom, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
+      @media screen and (max-width: 480px) {
+        .window {
+          width: calc(100% - 1rem)
+        }
       }
-      nav {
-        margin: 0;
-        position: fixed;
-        z-index: 10;
-        width: 100%;
-      }
-      nav .view_list_fanic {
-        width: 8rem;
-      }
-      nav .view_list_fanic.hover {
-        background-color: #C4C5CC;
-      }
-      nav .view_list {
-        width: 3rem;
-        height: 3rem;
-        display: inline-block;
-      }
-      nav .view_list .bar_wrapper {
-        margin: 1rem;
-      }
-      nav .view_list .bar {
-        height: 3px;
-        width: 1.5rem;
-        background-color: #C4C5CC;
-        border-radius: 10px;
-        margin-bottom: 4px;
-      }
-      nav .view_list #view_list_bar3 {
-        width: 1rem;
-      }
-      nav .fanic {
-        color: #C4C5CC;
-        font-family: "Helvetica Neue";
-        font-size: 1.5rem;
-        font-weight: bold;
-        display: inline-block;
-        vertical-align: top;
-        line-height: 3rem;
-        /*cursor: pointer;*/
-        cursor: default;
-      }
-      nav .star_list_div {
-        width: 100%;
-        height: 100vh;
-        background: rgba(244,248,248,0.9);
-      }
-      nav .star_list_div .star_list {
-        margin-left: 3rem;
-        margin-top: 2rem;
-        display: inline-block;
-      }
-      nav .star_list_div .star_list .star_name {
-        color: #C4C5CC;
-        font-family: "Helvetica Neue";
-        font-size: 3rem;
-        font-weight: bold;
-        line-height: 4.5rem;
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-      nav .star_list_div .star_list .star_name:hover {
-        color: #939499;
-      }
-      .content {
-        margin: 0 auto;
-        position: relative;
-        top: calc(50%);
-        transform: translateY(-50%);
-        width: auto;
-      }
-      .content .star_name {
-        color: #939499;
-        font-family: "Helvetica Neue";
-        font-size: 36px;
-        font-weight: bold;
-        margin: 0 auto;
-        margin-bottom: 20px;
-        width: 25rem;
-        transition: all 1s ease;
-        cursor: default
-      }
-      .content .star_name.play {
-        color: #C4C5CC;
-      }
-      .content .window {
-        width: 25rem;
-        height: 15.625rem;
-        border-radius: 0.75rem;
-        margin: 0 auto;
-        transition: box-shadow 1s ease,
-                    filter 0.4s ease,
-                    all 0.4s ease;
-        box-shadow: #aeb8bd 0 10px 30px;
-        border: 1px solid rgba(255,255,255,0);
-        background: rgba(255,255,255,1);
-        background: -moz-linear-gradient(top, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
-        background: -webkit-linear-gradient(top, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
-        background: -o-linear-gradient(top, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
-        background: linear-gradient(to bottom, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
-        cursor: pointer;
-      }
-      .content .window:hover {
-        border: 3px solid #fff;
-        width: calc(25rem - 6px);
-        height: calc(15.625rem - 6px);
-      }
-      .content .window.playing {
-        box-shadow : #9D9D9D 0 15px 45px 5px;
-        /*-webkit-animation: window_bounce  1.5s infinite;*/
-      }
-      .content .equalizer {
-        position: relative;
-        margin: 0 auto;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 26px;
-        height: 30px;
-      }
-      .content .equalizer .equalizer_bar {
-        width: 3px;
-        height: 5px;
-        background-color: #fff;
-        border-radius: 6px;
-        display: inline-block;
-        vertical-align: middle;
-        transition: all 1s ease;
-      }
-      .content .control_bar {
-        margin: 0 auto;
-        width: 18.75rem;
-      }
-      #progress_bar {
-        opacity: 0;
-      }
-      #progress_bar.play {
-        opacity: 1;
+      @media screen and (min-width: 480px) {
+        body {
+          margin: 0;
+          height: 100vh;
+          background: rgba(244,248,248,1);
+          background: -moz-linear-gradient(top, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
+          background: -webkit-linear-gradient(top, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
+          background: -o-linear-gradient(top, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
+          background: linear-gradient(to bottom, rgba(244,248,248,1) 0%, rgba(231,232,231,1) 100%);
+        }
+        nav {
+          margin: 0;
+          position: fixed;
+          z-index: 10;
+          width: 100%;
+        }
+        nav .view_list_fanic {
+          width: 8rem;
+        }
+        nav .view_list_fanic.hover {
+          background-color: #C4C5CC;
+        }
+        nav .view_list {
+          width: 3rem;
+          height: 3rem;
+          display: inline-block;
+        }
+        nav .view_list .bar_wrapper {
+          margin: 1rem;
+        }
+        nav .view_list .bar {
+          height: 3px;
+          width: 1.5rem;
+          background-color: #C4C5CC;
+          border-radius: 10px;
+          margin-bottom: 4px;
+        }
+        nav .view_list #view_list_bar3 {
+          width: 1rem;
+        }
+        nav .fanic {
+          color: #C4C5CC;
+          font-family: "Helvetica Neue";
+          font-size: 1.5rem;
+          font-weight: bold;
+          display: inline-block;
+          vertical-align: top;
+          line-height: 3rem;
+          /*cursor: pointer;*/
+          cursor: default;
+        }
+        nav .star_list_div {
+          width: 100%;
+          height: 100vh;
+          background: rgba(244,248,248,0.9);
+        }
+        nav .star_list_div .star_list {
+          margin-left: 3rem;
+          margin-top: 2rem;
+          display: inline-block;
+        }
+        nav .star_list_div .star_list .star_name {
+          color: #C4C5CC;
+          font-family: "Helvetica Neue";
+          font-size: 3rem;
+          font-weight: bold;
+          line-height: 4.5rem;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+        nav .star_list_div .star_list .star_name:hover {
+          color: #939499;
+        }
+        .content {
+          margin: 0 auto;
+          position: relative;
+          top: calc(50%);
+          transform: translateY(-50%);
+          width: auto;
+        }
+        .content .star_name {
+          color: #939499;
+          font-family: "Helvetica Neue";
+          font-size: 2.25rem;
+          font-weight: bold;
+          margin: 0 auto;
+          margin-bottom: 20px;
+          width: 25rem;
+          transition: all 1s ease;
+          cursor: default
+        }
+        .content .star_name.play {
+          color: #C4C5CC;
+        }
+        .content .window {
+          width: 25rem;
+          height: 15.625rem;
+          border-radius: 0.75rem;
+          margin: 0 auto;
+          transition: box-shadow 1s ease,
+                      filter 0.4s ease,
+                      all 0.4s ease;
+          box-shadow: #aeb8bd 0 10px 30px;
+          border: 1px solid rgba(255,255,255,0);
+          background: rgba(255,255,255,1);
+          background: -moz-linear-gradient(top, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
+          background: -webkit-linear-gradient(top, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
+          background: -o-linear-gradient(top, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
+          background: linear-gradient(to bottom, rgba(222,50,83,1) 0%, rgba(215,47,78,1) 100%);
+          cursor: pointer;
+        }
+        .content .window:hover {
+          border: 3px solid #fff;
+          width: calc(25rem - 6px);
+          height: calc(15.625rem - 6px);
+        }
+        .content .window.playing {
+          box-shadow : #9D9D9D 0 15px 45px 5px;
+          /*-webkit-animation: window_bounce  1.5s infinite;*/
+        }
+        .content .equalizer {
+          position: relative;
+          margin: 0 auto;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 26px;
+          height: 30px;
+        }
+        .content .equalizer .equalizer_bar {
+          width: 3px;
+          height: 5px;
+          background-color: #fff;
+          border-radius: 6px;
+          display: inline-block;
+          vertical-align: middle;
+          transition: all 1s ease;
+        }
+        .content .control_bar {
+          margin: 0 auto;
+          width: 18.75rem;
+        }
+        #progress_bar {
+          opacity: 0;
+        }
+        #progress_bar.play {
+          opacity: 1;
+        }
       }
     </style>
   </head>
