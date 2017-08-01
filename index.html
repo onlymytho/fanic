@@ -5,6 +5,7 @@
     <title></title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport">
     <link rel="stylesheet" href="./animation.css">
+    <link rel="stylesheet" href="./input_style.css">
     <style media="screen">
       body {
         margin: 0;
@@ -127,105 +128,6 @@
       #progress_bar.play {
         opacity: 1;
       }
-      input[type=range] {
-        height: 22px;
-        -webkit-appearance: none;
-        margin: auto;
-        margin: 2em 0 0 0;
-        width: 100%;
-        background-color: rgba(255,255,255,0);
-        transition: all 1s ease;
-      }
-      input[type=range]:focus {
-        outline: none;
-      }
-      input[type=range]::-webkit-slider-thumb {
-        box-shadow: 0px 1px 5px #aeb8bd;
-        border: 0px solid #000000;
-        height: 0.5rem;
-        width: 0.5rem;
-        border-radius: 1.5rem;
-        background: rgba(215,47,78,1);
-        cursor: pointer;
-        -webkit-appearance: none;
-        margin-top: -3px;
-        transition: all 0.4s ease;
-      }
-      input[type=range]::-webkit-slider-thumb:hover {
-        width: 1rem;
-        height: 1rem;
-        margin-top: -6px;
-        margin-left: -3px;
-        box-shadow: 0 3px 5px #aeb8bd;
-      }
-      input[type=range]::-moz-range-thumb {
-        box-shadow: 1px 1px 1px #aeb8bd;
-        border: 0px solid #000000;
-        height: 0.5rem;
-        width: 0.5rem;
-        border-radius: 1.5rem;
-        background: rgba(215,47,78,1);
-        cursor: pointer;
-        transition: all 0.4s ease;
-      }
-      input[type=range]::-moz-range-thumb:hover {
-        width: 1rem;
-        height: 1rem;
-        margin-top: -0.5rem;
-        margin-left: -0.25rem;
-      }
-      input[type=range]::-ms-thumb {
-        margin-top: 1px;
-        box-shadow: 1px 1px 1px #aeb8bd;
-        border: 0px solid #000000;
-        height: 0.5rem;
-        width: 0.5rem;
-        border-radius: 1.5rem;
-        background: rgba(215,47,78,1);
-        cursor: pointer;
-        transition: all 0.4s ease;
-      }
-      input[type=range]::-ms-thumb:hover {
-        width: 1rem;
-        height: 1rem;
-        margin-top: -6px;
-        margin-left: -3px;
-      }
-      input[type=range]::-webkit-slider-runnable-track {
-        width: 18.75rem;
-        height: 2px;
-        cursor: pointer;
-        animate: 0.2s;
-        background: #DCE2E6;
-        border-radius: 7px;
-        border: 0px solid #000000;
-        transition: all 0.4s ease;
-      }
-      input[type=range]::-webkit-slider-runnable-track:hover {
-        height: 3px;
-        margin-top: -1px;
-        background: #fff;
-        box-shadow: 0 1px 3px #DCE2E6;
-      }
-      input[type=range]::-moz-range-track {
-        width: 18.75rem;
-        height: 5px;
-        cursor: pointer;
-        animate: 0.2s;
-        background: #DCE2E6;
-        border-radius: 8px;
-        border: 1px solid #000000;
-      }
-      input[type=range]::-ms-track {
-        width: 18.75rem;
-        height: 5px;
-        cursor: pointer;
-        animate: 0.2s;
-        background: transparent;
-        border-color: transparent;
-        color: transparent;
-      }
-
     </style>
   </head>
   <body>
@@ -277,7 +179,6 @@
         player = new YT.Player('video', {
           height: '0',
           width: '0',
-          videoId: 'mMfFNbDome8',
           playerVars: {
             'loop' : 1
           },
@@ -288,61 +189,70 @@
           }
         });
       }
-      function changeBorderColor(playerStatus) {
-        var color;
-        var windowdiv = document.getElementsByClassName('window')[0]
-        if (playerStatus == -1) {
-           // unstarted = gray
-        } else if (playerStatus == 0) {
-           player.playVideo(); // ended = yellow
-        } else if (playerStatus == 1) {
-          windowdiv.style.filter = '' // playing = green
-        } else if (playerStatus == 2) {
-           // paused = red
-        } else if (playerStatus == 3) {
-          windowdiv.style.filter = 'brightness(140%) contrast(80%)'; // buffering = purple
-        } else if (playerStatus == 5) {
-          color = "#FF6DOO"; // video cued = orange
-        }
+      var global_playerStatus;
+      var play_button_role = document.getElementsByClassName('window')[0]
+      function showPlayState() {
+        play_button_role.style.filter = ''
+        play_button_role.classList.add('playing')
+        document.getElementsByClassName('star_name')[0].classList.add('play')
+        for (i=1; i<5; i++) {document.getElementById('equalizer_bar'+i).classList.add('play')}
+        for (i=1; i<4; i++) {document.getElementById('view_list_bar'+i).classList.add('play')}
+        document.getElementById('progress_bar').classList.add('play')
+      }
+      function showStopState() {
+        is_playing = false;
+        play_button_role.classList.remove('playing')
+        document.getElementsByClassName('star_name')[0].classList.remove('play')
+        for (i=1; i<5; i++) {document.getElementById('equalizer_bar'+i).classList.remove('play')}
+        for (i=1; i<4; i++) {document.getElementById('view_list_bar'+i).classList.remove('play')}
+        document.getElementById('progress_bar').classList.remove('play')
       }
       function onPlayerStateChange(event) {
         changeBorderColor(event.data);
+        global_playerStatus = event.data;
       }
+      function changeBorderColor(playerStatus) {
+        if (playerStatus == -1) { // unstarted = gray
 
+        } else if (playerStatus == 0) { // ended = yellow
 
-      var is_playing = false;
+        } else if (playerStatus == 1) { // playing = green
+          showPlayState()
+        } else if (playerStatus == 2) { // paused = red
+          showStopState()
+        } else if (playerStatus == 3) { // buffering = purple
+          play_button_role.style.filter = 'brightness(140%) contrast(80%)';
+        } else if (playerStatus == 5) { // video cued = orange
+        }
+      }
 
       function onPlayerReady(event) {
         updateProgressBar();
+        // event.target.loadPlaylist(['Mpzg3a-V9MM', 'AT_dnkxNjNk', 'KfqU7CxT2Eo', 'NG96ZzUs', 'isMzP42pxZ4', '_CXlw73qcHU', 'cff80NHja4', '24v14KUpOYE', '9Y5RCGRZg1Y']);
+        event.target.loadPlaylist({
+                'list': 'PLUzSnDUUTfrsl7IvzlMDGxXvPWE93cLGG',
+                'listType': 'playlist',
+                'index': 0,
+                'startSeconds': 0,
+                'suggestedQuality': 'small'
+            });
         player.setLoop(true);
         time_update_interval = setInterval(function () {
             updateProgressBar();
         }, 1000)
         // bind events
-        var play_button_role = document.getElementsByClassName('window')[0]
-        play_button_role.addEventListener("click", function() {
-            if (is_playing == false) {
-              player.playVideo();
-              is_playing = true;
-              play_button_role.classList.add('playing')
-              document.getElementsByClassName('star_name')[0].classList.add('play')
-              for (i=1; i<5; i++) {document.getElementById('equalizer_bar'+i).classList.add('play')}
-              for (i=1; i<4; i++) {document.getElementById('view_list_bar'+i).classList.add('play')}
-              document.getElementById('progress_bar').classList.add('play')
 
+        play_button_role.addEventListener("click", function() {
+            if (global_playerStatus in [-1, 0, 2]) {
+              player.playVideo();
             }
-            else {
+            if (global_playerStatus == 1) {
               player.pauseVideo()
-              is_playing = false;
-              play_button_role.classList.remove('playing')
-              document.getElementsByClassName('star_name')[0].classList.remove('play')
-              for (i=1; i<5; i++) {document.getElementById('equalizer_bar'+i).classList.remove('play')}
-              for (i=1; i<4; i++) {document.getElementById('view_list_bar'+i).classList.remove('play')}
-              document.getElementById('progress_bar').classList.remove('play')
             }
           }
         )
       }
+
       // Set progress bar
       var progress_bar = document.getElementById('progress_bar')
       progress_bar.addEventListener('mouseup', function(event) {
