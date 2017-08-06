@@ -26,7 +26,6 @@
     <!-- <meta content="photo" name="twitter:card"> -->
     <meta content="Fanic" name="twitter:title">
     <meta content="List your favorite playlist of your star. Do Fanic!" name="twitter:description">
-    <script async="" src="./Before Airbnb_files/analytics.js"></script>
 
   </head>
   <body>
@@ -84,11 +83,16 @@
       function onYouTubeIframeAPIReady() {
         // create the global player from the specific iframe (#video)
         player = new YT.Player('video', {
-          height: '290',
-          width: '290',
+          height: '1',
+          width: '1',
           playerVars: {
             'loop' : 1,
-            'playsinline' : 1
+            'playsinline' : 1,
+            'list': 'PLUzSnDUUTfrsl7IvzlMDGxXvPWE93cLGG',
+            'listType': 'playlist',
+            'index': 0,
+            'startSeconds': 0,
+            'suggestedQuality': 'small'
           },
           events: {
             // call this function when player is ready to use
@@ -134,16 +138,19 @@
         }
       }
 
+      function autoplay_except_for_mobile() {
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+          return false;
+        }
+        else {
+          player.playVideo();
+        }
+      }
       function onPlayerReady(event) {
         updateProgressBar();
         // event.target.loadPlaylist(['Mpzg3a-V9MM', 'AT_dnkxNjNk', 'KfqU7CxT2Eo', 'NG96ZzUs', 'isMzP42pxZ4', '_CXlw73qcHU', 'cff80NHja4', '24v14KUpOYE', '9Y5RCGRZg1Y']);
-        event.target.loadPlaylist({
-                'list': 'PLUzSnDUUTfrsl7IvzlMDGxXvPWE93cLGG',
-                'listType': 'playlist',
-                'index': 0,
-                'startSeconds': 0,
-                'suggestedQuality': 'small'
-            });
+        autoplay_except_for_mobile()
         player.setLoop(true);
         time_update_interval = setInterval(function () {
             updateProgressBar();
@@ -151,11 +158,11 @@
         // bind events
 
         play_button_role.addEventListener("click", function() {
-            if (global_playerStatus in [-1, 0, 2]) {
-              player.playVideo();
-            }
             if (global_playerStatus == 1) {
               player.pauseVideo()
+            }
+            else {
+              player.playVideo();
             }
           }
         )
