@@ -1,10 +1,10 @@
-nav .view_list #view_list_bar1.play {
+.view_list #view_list_bar1.play {
   -webkit-animation: view_list_bar1  1s infinite;
 }
-nav .view_list #view_list_bar2.play {
+.view_list #view_list_bar2.play {
   -webkit-animation: view_list_bar2  1s infinite;
 }
-nav .view_list #view_list_bar3.play {
+.view_list #view_list_bar3.play {
   -webkit-animation: view_list_bar3  1s infinite;
 }
 @-webkit-keyframes view_list_bar1 {

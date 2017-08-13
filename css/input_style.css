@@ -96,3 +96,10 @@ input[type=range]::-ms-track {
   border-color: transparent;
   color: transparent;
 }
+
+input[type=range]::-moz-range-progress {
+  background: rgba(215,47,78,1);
+}
+input[type=range]::-ms-fill-lower {
+  background: rgba(215,47,78,1);
+}

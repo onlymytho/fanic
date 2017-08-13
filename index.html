@@ -56,8 +56,24 @@
     <div class="content">
       <div class="star_name">
         Park Hyoshin
+        <input type="checkbox" name="button" onclick="video_on('checkbox')"></button>
       </div>
       <div class="window">
+        <div id="video"></div>
+        <script type="text/javascript">
+          function video_on(source) {
+            if (source == 'checkbox') {
+              document.getElementById('video').classList.toggle('on');
+              document.getElementsByClassName('equalizer')[0].classList.toggle('video_on');
+            }
+            else {
+                document.getElementById('video').classList.add('on');
+                document.getElementsByClassName('equalizer')[0].classList.add('video_on');
+            }
+          }
+        </script>
+        <div class="music_title">
+        </div>
         <div class="equalizer">
           <div id="equalizer_bar1" class="equalizer_bar"></div>
           <div id="equalizer_bar2" class="equalizer_bar"></div>
@@ -129,7 +145,9 @@
         } else if (playerStatus == 0) { // ended
           player.nextVideo()
         } else if (playerStatus == 1) { // playing
-          showPlayState()
+          showPlayState();
+          video_on('others');
+          document.querySelector('.content input[type=checkbox]').checked = true;
         } else if (playerStatus == 2) { // paused
           showStopState()
         } else if (playerStatus == 3) { // buffering
@@ -137,7 +155,9 @@
         } else if (playerStatus == 5) { // video cued
         }
       }
-
+      function show_music_title() {
+        document.getElementsByClassName('music_title')[0].innerText = player.getVideoData().title;
+      }
       function autoplay_except_for_mobile() {
         var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         if (isMobile) {
@@ -150,7 +170,7 @@
       function onPlayerReady(event) {
         updateProgressBar();
         // event.target.loadPlaylist(['Mpzg3a-V9MM', 'AT_dnkxNjNk', 'KfqU7CxT2Eo', 'NG96ZzUs', 'isMzP42pxZ4', '_CXlw73qcHU', 'cff80NHja4', '24v14KUpOYE', '9Y5RCGRZg1Y']);
-        autoplay_except_for_mobile()
+        autoplay_except_for_mobile();
         player.setLoop(true);
         time_update_interval = setInterval(function () {
             updateProgressBar();
@@ -186,6 +206,6 @@
         return false;
       }
     </script>
-    <div id="video"></div>
+
   </body>
 </html>
