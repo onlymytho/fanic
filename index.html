@@ -24,7 +24,17 @@
 
       ga('create', 'UA-63621212-3', 'auto');
       ga('send', 'pageview');
+    </script>
+    <script type="text/javascript">
+        var startTime = new Date();        //Start the clock!
+        window.onbeforeunload = function()        //When the user leaves the page(closes the window/tab, clicks a link)...
+        {
+            var endTime = new Date();        //Get the current time.
+            var timeSpent=(endTime - startTime);        //Find out how long it's been.
+            ga('send', 'event', 'Page Duration', timeSpent);        //Pop up a window with the time spent in microseconds.
+            ga('send', 'event', 'Page Duration', 'easy_avg_view', 'easy_avg_view', timeSpent);        //Pop up a window with the time spent in microseconds.
 
+        }
     </script>
     <!-- Facebook -->
     <meta content="Fanic" property="og:site_name">
@@ -41,7 +51,7 @@
   </head>
   <body>
     <nav>
-      <!-- <a href="javascript:" onclick="open_view_list()" style="text-decoration: none;"> -->
+      <a onclick="open_view_list()" style="cursor: normal; text-decoration: none;">
         <div class="view_list_fanic">
           <div class="view_list">
             <div class="bar_wrapper">
@@ -54,8 +64,8 @@
             Fanic
           </div>
         </div>
-      <!-- </a>
-      <div class="star_list_div">
+      </a>
+      <!-- <div class="star_list_div">
         <div class="star_list">
           <div class="star_name">Park Hyoshin</div>
           <div class="star_name">Dynamic Duo</div>
@@ -166,6 +176,7 @@
         if (playerStatus == -1) { // unstarted
 
         } else if (playerStatus == 0) { // ended
+          ga('send', 'event', 'Ended', 'End music ' + player.getPlaylistIndex());
           player.nextVideo()
         } else if (playerStatus == 1) { // playing
           showPlayState();
@@ -174,6 +185,7 @@
           document.querySelector('.content input[type=checkbox]').checked = true;
         } else if (playerStatus == 2) { // paused
           showStopState()
+          ga('send', 'event', 'Pause', 'Pause music ' + player.getPlaylistIndex());
         } else if (playerStatus == 3) { // buffering
           play_button_role.style.filter = 'brightness(140%) contrast(80%)';
         } else if (playerStatus == 5) { // video cued
@@ -225,7 +237,7 @@
         progress_bar.value = (player.getCurrentTime() / player.getDuration()) * 100;
       }
       function open_view_list() {
-
+        ga('send', 'event', 'View list', 'Click view list');
         return false;
       }
     </script>
