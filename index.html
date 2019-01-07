@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="./css/animation.css">
     <link rel="stylesheet" href="./css/input_style.css">
-    <link rel="stylesheet" media='screen and (min-width: 500px)' href="./css/style.css">
+    <link rel="stylesheet" media='screen and (min-width: 500px)' href="./css/master.css">
     <link rel="stylesheet" media='screen and (max-width: 500px)' href="./css/style_mobile.css">
 
     <meta content="List your favorite playlist of your star. Do Fanic!" name="description">
@@ -16,6 +16,12 @@
     <meta name="Access-Control-Allow-Origin" content="*">
 
     <!-- GA -->
+    <style>.async-hide { opacity: 0 !important} </style>
+    <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
+    h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
+    (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
+    })(window,document.documentElement,'async-hide','dataLayer',4000,
+    {'GTM-5GKK83J':true});</script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -23,8 +29,10 @@
       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-63621212-3', 'auto');
+      ga('require', 'GTM-5GKK83J');
       ga('send', 'pageview');
     </script>
+    
     <script type="text/javascript">
         var startTime = new Date();        //Start the clock!
         window.onbeforeunload = function()        //When the user leaves the page(closes the window/tab, clicks a link)...
@@ -50,197 +58,69 @@
 
   </head>
   <body>
-    <nav>
-      <a onclick="open_view_list()" style="cursor: normal; text-decoration: none;">
-        <div class="view_list_fanic">
-          <div class="view_list">
-            <div class="bar_wrapper">
-              <div class="bar" id="view_list_bar1"></div>
-              <div class="bar" id="view_list_bar2"></div>
-              <div class="bar" id="view_list_bar3"></div>
-            </div>
+    <nav class="starListNav">
+      <a class="starListNavLabel" onclick="open_view_list()" style="text-decoration: none;">
+        
+          <div class="threeBarIcon">
+            <div class="threeBarIcon_bar" id="threeBarIcon_bar1"></div>
+            <div class="threeBarIcon_bar" id="threeBarIcon_bar2"></div>
+            <div class="threeBarIcon_bar" id="threeBarIcon_bar3"></div>
           </div>
-          <div class="fanic">
+          <div class="fanicLogo">
             Fanic
           </div>
-        </div>
+        
       </a>
-      <!-- <div class="star_list_div">
-        <div class="star_list">
-          <div class="star_name">Park Hyoshin</div>
-          <div class="star_name">Dynamic Duo</div>
-          <div class="star_name">Dynamic Duo</div>
-          <div class="star_name">Dynamic Duo</div>
+      <div class="starListDiv">
+        <div class="starList">
+          <div class="starName">Park Hyoshin</div>
+          <div class="starName">Beomjoon Jang</div>
         </div>
-      </div> -->
+        <div><button onclick="document.querySelector('.starListDiv').classList.remove('open')">close</button></div>
+      </div>
+      
     </nav>
     <div class="content">
-      <div class="star_name">
+      <div class="starName">
         Park Hyoshin
         <input type="checkbox" name="button" onclick="video_on('checkbox')"></button>
       </div>
-      <div class="window">
-        <div id="video"></div>
-        <script type="text/javascript">
-          function video_on(source) {
-            if (source == 'checkbox') {
-              document.getElementById('video').classList.toggle('on');
-              document.getElementsByClassName('equalizer')[0].classList.toggle('video_on');
-              var checkbox_status = document.querySelector('.content input[type=checkbox]').checked;
-              ga('send', 'event', 'Checkbox', 'Checkbox '+ checkbox_status);
-            }
-            else {
-                document.getElementById('video').classList.add('on');
-                document.getElementsByClassName('equalizer')[0].classList.add('video_on');
-            }
-          }
-        </script>
-        <div class="music_title">
-        </div>
-        <div class="equalizer">
-          <div id="equalizer_bar1" class="equalizer_bar"></div>
-          <div id="equalizer_bar2" class="equalizer_bar"></div>
-          <div id="equalizer_bar3" class="equalizer_bar"></div>
-          <div id="equalizer_bar4" class="equalizer_bar"></div>
-        </div>
+      <div class="videos">
+          <div class="video">
+              <div class="window">
+                <div id="video"></div>
+                <div class="equalizer">
+                  <div id="equalizer_bar1" class="equalizer_bar"></div>
+                  <div id="equalizer_bar2" class="equalizer_bar"></div>
+                  <div id="equalizer_bar3" class="equalizer_bar"></div>
+                  <div id="equalizer_bar4" class="equalizer_bar"></div>
+                </div>
+              </div>
+              <div class="control_bar">
+                <input type="range" id="progress_bar" value="50">
+              </div>
+          </div>
       </div>
-      <div class="control_bar">
-        <input type="range" id="progress_bar" value="50">
+      <div class="videoListDescription">
+          박효신의 이야기입니다.
       </div>
     </div>
 
-
     <script type="text/javascript">
-      // Inject YouTube API script
-      var tag = document.createElement('script');
-      tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-      document.body.onkeyup = function(e){
-          if(e.keyCode == 32){
-            if (global_playerStatus == 1) {
-              player.pauseVideo()
-            }
-            else {
-              player.playVideo();
-            }
-          }
-      }
-      var player;
-
-      function onYouTubeIframeAPIReady() {
-        // create the global player from the specific iframe (#video)
-        player = new YT.Player('video', {
-          height: '1',
-          width: '1',
-          playerVars: {
-            'loop' : 1,
-            'playsinline' : 1,
-            'list': 'PLUzSnDUUTfrsl7IvzlMDGxXvPWE93cLGG',
-            'listType': 'playlist',
-            'index': 0,
-            'startSeconds': 0,
-            'suggestedQuality': 'small'
-          },
-          events: {
-            // call this function when player is ready to use
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-          }
-        });
-      }
-      var global_playerStatus;
-      var play_button_role = document.getElementsByClassName('window')[0]
-      function showPlayState() {
-        play_button_role.style.filter = ''
-        play_button_role.classList.add('playing')
-        document.getElementsByClassName('star_name')[0].classList.add('play')
-        for (i=1; i<5; i++) {document.getElementById('equalizer_bar'+i).classList.add('play')}
-        for (i=1; i<4; i++) {document.getElementById('view_list_bar'+i).classList.add('play')}
-        document.getElementById('progress_bar').classList.add('play')
-      }
-      function showStopState() {
-        is_playing = false;
-        play_button_role.classList.remove('playing')
-        document.getElementsByClassName('star_name')[0].classList.remove('play')
-        for (i=1; i<5; i++) {document.getElementById('equalizer_bar'+i).classList.remove('play')}
-        for (i=1; i<4; i++) {document.getElementById('view_list_bar'+i).classList.remove('play')}
-        document.getElementById('progress_bar').classList.remove('play')
-      }
-      function onPlayerStateChange(event) {
-        changeBorderColor(event.data);
-        global_playerStatus = event.data;
-      }
-      function changeBorderColor(playerStatus) {
-        if (playerStatus == -1) { // unstarted
-
-        } else if (playerStatus == 0) { // ended
-          ga('send', 'event', 'Ended', 'End music ' + player.getPlaylistIndex());
-          player.nextVideo()
-        } else if (playerStatus == 1) { // playing
-          showPlayState();
-          video_on('others');
-          ga('send', 'event', 'Play', 'Play music ' + player.getPlaylistIndex());
-          document.querySelector('.content input[type=checkbox]').checked = true;
-        } else if (playerStatus == 2) { // paused
-          showStopState()
-          ga('send', 'event', 'Pause', 'Pause music ' + player.getPlaylistIndex());
-        } else if (playerStatus == 3) { // buffering
-          play_button_role.style.filter = 'brightness(140%) contrast(80%)';
-        } else if (playerStatus == 5) { // video cued
-        }
-      }
-      function autoplay_except_for_mobile() {
-        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-        if (isMobile) {
-          return false;
+      function video_on(source) {
+        if (source == 'checkbox') {
+          document.getElementById('video').classList.toggle('on');
+          document.getElementsByClassName('equalizer')[0].classList.toggle('video_on');
+          var checkbox_status = document.querySelector('.content input[type=checkbox]').checked;
+          ga('send', 'event', 'Checkbox', 'Checkbox '+ checkbox_status);
         }
         else {
-          player.playVideo();
+            document.getElementById('video').classList.add('on');
+            document.getElementsByClassName('equalizer')[0].classList.add('video_on');
         }
       }
-      function onPlayerReady(event) {
-        updateProgressBar();
-        // event.target.loadPlaylist(['Mpzg3a-V9MM', 'AT_dnkxNjNk', 'KfqU7CxT2Eo', 'NG96ZzUs', 'isMzP42pxZ4', '_CXlw73qcHU', 'cff80NHja4', '24v14KUpOYE', '9Y5RCGRZg1Y']);
-        autoplay_except_for_mobile();
-        player.setLoop(true);
-        time_update_interval = setInterval(function () {
-            updateProgressBar();
-        }, 1000)
-        // bind events
-
-        play_button_role.addEventListener("click", function() {
-            if (global_playerStatus == 1) {
-              player.pauseVideo()
-              ga('send', 'event', 'Pause', 'Pause music ' + player.getPlaylistIndex(), 'user_action');
-            }
-            else {
-              player.playVideo();
-              ga('send', 'event', 'Play', 'Play music ' + player.getPlaylistIndex(), 'user_action');
-            }
-          }
-        )
-      }
-
-      // Set progress bar
-      var progress_bar = document.getElementById('progress_bar')
-      progress_bar.addEventListener('mouseup', function(event) {
-        var newTime = player.getDuration() * (event.target.value / 100);
-        player.seekTo(newTime);
-      })
-      progress_bar.addEventListener('touchend', function(event) {
-        var newTime = player.getDuration() * (event.target.value / 100);
-        player.seekTo(newTime);
-      })
-      function updateProgressBar(){
-        progress_bar.value = (player.getCurrentTime() / player.getDuration()) * 100;
-      }
-      function open_view_list() {
-        ga('send', 'event', 'View list', 'Click view list');
-        return false;
-      }
     </script>
-
+    <script type="text/javascript" src="./js/youtube_controller.js"></script>
+    <script type="text/javascript" src="./js/view_list.js"></script>
   </body>
 </html>
