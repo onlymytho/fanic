@@ -14,24 +14,11 @@
     <meta content="List your favorite playlist of your star. Do Fanic!" name="description">
     <meta content="English" name="language">
     <meta name="Access-Control-Allow-Origin" content="*">
-
+    <!-- Inject YouTube API script to HTML -->
+    <script src="https://www.youtube.com/iframe_api"></script>
     <!-- GA -->
     <style>.async-hide { opacity: 0 !important} </style>
-    <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
-    h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
-    (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
-    })(window,document.documentElement,'async-hide','dataLayer',4000,
-    {'GTM-5GKK83J':true});</script>
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-63621212-3', 'auto');
-      ga('require', 'GTM-5GKK83J');
-      ga('send', 'pageview');
-    </script>
+    <script src="./js/head/ga.js"></script>
     
     <script type="text/javascript">
         var startTime = new Date();        //Start the clock!
@@ -55,12 +42,10 @@
     <!-- <meta content="photo" name="twitter:card"> -->
     <meta content="Fanic" name="twitter:title">
     <meta content="List your favorite playlist of your star. Do Fanic!" name="twitter:description">
-
   </head>
   <body>
     <nav class="starListNav">
       <a class="starListNavLabel" onclick="open_view_list()" style="text-decoration: none;">
-        
           <div class="threeBarIcon">
             <div class="threeBarIcon_bar" id="threeBarIcon_bar1"></div>
             <div class="threeBarIcon_bar" id="threeBarIcon_bar2"></div>
@@ -69,58 +54,111 @@
           <div class="fanicLogo">
             Fanic
           </div>
-        
       </a>
       <div class="starListDiv">
-        <div class="starList">
-          <div class="starName">Park Hyoshin</div>
-          <div class="starName">Beomjoon Jang</div>
-        </div>
-        <div><button onclick="document.querySelector('.starListDiv').classList.remove('open')">close</button></div>
+        <ul class="starList">
+          <li class="starName">Park Hyoshin</li>
+          <li class="starName">Beomjoon Jang</li>
+        </ul>
       </div>
-      
     </nav>
     <div class="content">
-      <div class="starName">
-        Park Hyoshin
-        <input type="checkbox" name="button" onclick="video_on('checkbox')"></button>
-      </div>
-      <div class="videos">
-          <div class="video">
-              <div class="window">
-                <div id="video"></div>
-                <div class="equalizer">
-                  <div id="equalizer_bar1" class="equalizer_bar"></div>
-                  <div id="equalizer_bar2" class="equalizer_bar"></div>
-                  <div id="equalizer_bar3" class="equalizer_bar"></div>
-                  <div id="equalizer_bar4" class="equalizer_bar"></div>
+      <div class="videoListDiv">
+        <ul class="videoList">
+          <li class="videoItem big red">
+            <div class="videoFullShowWrapper">
+              <div class="videoStarName">
+                Park Hyoshin
+                <input class="displaySwitch" type="checkbox" name="button"></button>
+              </div>
+              <div class="video">
+                <div class="videoWindow">
+                  <div class="videoYoutubePlayer"></div>
+                  <div class="videoPlayEqualizer">
+                    <div id="equalizer_bar1" class="equalizer_bar"></div>
+                    <div id="equalizer_bar2" class="equalizer_bar"></div>
+                    <div id="equalizer_bar3" class="equalizer_bar"></div>
+                    <div id="equalizer_bar4" class="equalizer_bar"></div>
+                  </div>
+                </div>
+                <div class="control_bar">
+                  <input type="range" class="videoProgressBar" value="50">
                 </div>
               </div>
-              <div class="control_bar">
-                <input type="range" id="progress_bar" value="50">
+            </div>
+          </li>
+          <li class="videoItem regular mustard">
+            <div class="videoFullShowWrapper">
+              <div class="videoStarName">
+              Beomjune Jang
+              <input class="displaySwitch" type="checkbox" name="button"></button>
               </div>
-          </div>
-      </div>
-      <div class="videoListDescription">
-          박효신의 이야기입니다.
+              <div class="video">
+                <div class="videoWindow">
+                  <div class="videoYoutubePlayer"></div>
+                  <div class="videoPlayEqualizer">
+                    <div id="equalizer_bar1" class="equalizer_bar"></div>
+                    <div id="equalizer_bar2" class="equalizer_bar"></div>
+                    <div id="equalizer_bar3" class="equalizer_bar"></div>
+                    <div id="equalizer_bar4" class="equalizer_bar"></div>
+                  </div>
+                </div>
+                <div class="control_bar">
+                  <input type="range" class="videoProgressBar" value="50">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="videoItem regular blue">
+            <div class="videoFullShowWrapper">
+              <div class="videoStarName">
+                Yerin Baek
+                <input class="displaySwitch" type="checkbox" name="button"></button>
+              </div>
+              <div class="video">
+                <div class="videoWindow">
+                  <div class="videoYoutubePlayer"></div>
+                  <div class="videoPlayEqualizer">
+                    <div id="equalizer_bar1" class="equalizer_bar"></div>
+                    <div id="equalizer_bar2" class="equalizer_bar"></div>
+                    <div id="equalizer_bar3" class="equalizer_bar"></div>
+                    <div id="equalizer_bar4" class="equalizer_bar"></div>
+                  </div>
+                </div>
+                <div class="control_bar">
+                  <input type="range" class="videoProgressBar" value="50">
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="videoItem regular jade">
+            <div class="videoFullShowWrapper">
+              <div class="videoStarName">
+                PREP
+                <input class="displaySwitch" type="checkbox" name="button"></button>
+              </div>
+              <div class="video">
+                  <div class="videoWindow">
+                    <div class="videoYoutubePlayer"></div>
+                    <div class="videoPlayEqualizer">
+                      <div id="equalizer_bar1" class="equalizer_bar"></div>
+                      <div id="equalizer_bar2" class="equalizer_bar"></div>
+                      <div id="equalizer_bar3" class="equalizer_bar"></div>
+                      <div id="equalizer_bar4" class="equalizer_bar"></div>
+                    </div>
+                  </div>
+                  <div class="control_bar">
+                    <input type="range" class="videoProgressBar" value="50">
+                  </div>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <script type="text/javascript">
-      function video_on(source) {
-        if (source == 'checkbox') {
-          document.getElementById('video').classList.toggle('on');
-          document.getElementsByClassName('equalizer')[0].classList.toggle('video_on');
-          var checkbox_status = document.querySelector('.content input[type=checkbox]').checked;
-          ga('send', 'event', 'Checkbox', 'Checkbox '+ checkbox_status);
-        }
-        else {
-            document.getElementById('video').classList.add('on');
-            document.getElementsByClassName('equalizer')[0].classList.add('video_on');
-        }
-      }
-    </script>
-    <script type="text/javascript" src="./js/youtube_controller.js"></script>
+    <script type="text/javascript" src="./js/player.js"></script>
+    <!-- <script type="text/javascript" src="./js/youtube_controller.js"></script> -->
     <script type="text/javascript" src="./js/view_list.js"></script>
   </body>
 </html>
