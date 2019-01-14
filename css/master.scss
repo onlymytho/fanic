@@ -48,12 +48,14 @@ ul {
     position: absolute;
     z-index: 100;
     background: rgba(244,248,248,1);
+    width: 100vw;
     height: 100vh;
     cursor: zoom-out;
     .videoFullShowWrapper {      
       margin-top: 50vh;
       margin-left: 50vw;
       transform: translate(-50%, -50%);
+      width: fit-content;
       .videoStarName {
         margin-left: 0;
         width: $videoItem__show__width;
