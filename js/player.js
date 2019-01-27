@@ -5,12 +5,14 @@ var playLists = [
   {"player": undefined, "playListId": "PLdARt-4U-XHEE6F7f1SLbugwG9JbApzmn"},
   {"player": undefined, "playListId": "PLhxsOjDimOoTXRMEz8RLGX1bX08K9HZGS"},
 ]
+var playerIndex = {}
 
 var videoPlayer             = document.querySelectorAll(".videoYoutubePlayer")
 var videoStarName           = document.querySelectorAll('.videoStarName');
 var videoProgressBar        = document.querySelectorAll('.videoProgressBar');
 var videoPlayEqualizer      = document.querySelectorAll('.videoPlayEqualizer');
 var videoDisplaySwitcher    = document.querySelectorAll('.displaySwitch');
+var currentPlaylist         = undefined;
 
 function onYouTubeIframeAPIReady() {
   playLists.forEach((player, index) => {
@@ -36,6 +38,7 @@ function onYouTubeIframeAPIReady() {
       }
     )
     playLists[index]["player"] = player
+    playerIndex[playLists[index]["playListId"]] = index
     })
   };
 
@@ -82,12 +85,13 @@ function changeBorderColor(targetPlayer, playerStatus) {
 
   } else if (playerStatus == 0) { // ended
     ga('send', 'event', 'Ended', 'End music ' + targetPlayer.getPlaylistIndex());
-    targetPlayer.nextVideo()
   
   } else if (playerStatus == 1) { // playing
     showPlayState(targetPlayer);
     ga('send', 'event', 'Play', 'Play music ' + targetPlayer.getPlaylistIndex());
     targetPlayerDisplaySwitcher.checked = true;
+    currentPlaylist = targetPlayer.b.b.playerVars.list
+    localStorage.setItem('last_playList', currentPlaylist);
   
   } else if (playerStatus == 2) { // paused
     showStopState(targetPlayer)
@@ -140,8 +144,18 @@ function onPlayerReady(event) {
   targetPlayerVideoItem.addEventListener("click", function(e) {videoFullShow(false, targetPlayer); e.stopPropagation();});
   targetPlayerVideoItem.addEventListener("scroll", function(e) {e.stopPropagation();});
   targetPlayerDisplaySwitcher.addEventListener("click", function(e) {videoDisplayOn('checkbox', targetPlayer); e.stopPropagation();});
-  if (targetPlayer == playLists[0]['player']) {
-    autoplay_except_for_mobile(targetPlayer);
+  
+  if (localStorage.getItem('last_playList')) {
+    // 이전에 재생한 마지막 플레이리스트 재생
+    let last_playList = localStorage.getItem('last_playList')
+    let last_playList_Index = playerIndex[last_playList]
+    var autoplayTargetPlayer = playLists[last_playList_Index]['player']
+    if (targetPlayer == autoplayTargetPlayer) {
+      autoplay_except_for_mobile(autoplayTargetPlayer)        
+    }
+  } else {
+    var autoplayTargetPlayer = playLists[0]['player']
+    autoplay_except_for_mobile(autoplayTargetPlayer)  
   }
 }
 
