@@ -14,50 +14,15 @@ class VideoItem extends Component {
 
     constructor(propTypes) {
         super(propTypes);
-        this.state = {isPlaying: false};
+        this.state = {
+            isPlaying: false
+        };
 
         this._onReady = this._onReady.bind(this);
         this._onPause = this._onPause.bind(this);
-        this._onPlay = this._onPlay.bind(this);
+        this._onPlay = this._onPlay.bind(this); 
     }
 
-    _onReady(e) {
-        e.target.pauseVideo();
-        console.log('ready')
-    }
-    _onPause(e) {
-        console.log('pause')
-    }
-    
-    _onPlay(e) {
-        // access to player in all event handlers via event.target
-        console.log(e.data)
-        console.log('play')
-        this.setState({
-            isPlaying: true
-        });
-        console.log(this.state.isPlaying)
-
-        // player = event.target
-        // player.pauseVideo();
-
-        // let targetPlayerWindow = targetPlayer.a.parentElement
-        // let targetPlayerStarName = targetPlayerWindow.parentElement.parentElement.querySelector('.videoStarName')
-        // let targetPlayerEqualizer = targetPlayerWindow.querySelector('.videoPlayEqualizer')
-        // let targetPlayerVideoItem = targetPlayerWindow.parentElement.parentElement.parentElement
-        
-        // targetPlayerWindow.style.filter = '';
-        // targetPlayerWindow.classList.add('playing');
-        // targetPlayerStarName.classList.add('playing');
-        // if (!targetPlayerVideoItem.classList.contains('fullShow')) {
-        //   videoFullShow(true, targetPlayer);
-        // }
-        // videoDisplayOn('others', targetPlayer);
-        // targetPlayerEqualizer.classList.add('is_playing')
-
-
-        // videoProgressBar.classList.add('play')
-    }
     render() {
         const isPlaying = this.state.isPlaying
         const classNameWithPlaying = (className) => {return className + (isPlaying ? " playing" : '')};
@@ -104,6 +69,44 @@ class VideoItem extends Component {
             </li>
         )
     };
+
+    _onReady(e) {
+        e.target.pauseVideo();
+        console.log('ready')
+    }
+    _onPause(e) {
+        console.log('pause')
+    }
+    
+    _onPlay(e) {
+        // access to player in all event handlers via event.target
+        console.log(e.data)
+        console.log('play')
+        this.setState({
+            isPlaying: true
+        });
+        console.log(this.state.isPlaying)
+
+        // player = event.target
+        // player.pauseVideo();
+
+        // let targetPlayerWindow = targetPlayer.a.parentElement
+        // let targetPlayerStarName = targetPlayerWindow.parentElement.parentElement.querySelector('.videoStarName')
+        // let targetPlayerEqualizer = targetPlayerWindow.querySelector('.videoPlayEqualizer')
+        // let targetPlayerVideoItem = targetPlayerWindow.parentElement.parentElement.parentElement
+        
+        // targetPlayerWindow.style.filter = '';
+        // targetPlayerWindow.classList.add('playing');
+        // targetPlayerStarName.classList.add('playing');
+        // if (!targetPlayerVideoItem.classList.contains('fullShow')) {
+        //   videoFullShow(true, targetPlayer);
+        // }
+        // videoDisplayOn('others', targetPlayer);
+        // targetPlayerEqualizer.classList.add('is_playing')
+
+
+        // videoProgressBar.classList.add('play')
+    }
 }
 
 export default VideoItem;

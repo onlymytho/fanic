@@ -23,10 +23,30 @@ function App() {
     <div className="content">
       <div className="videoListDiv">
         <ul className="videoList">
-          <VideoItem name="Park Hyoshin" size="big" color="red" playList="PLUzSnDUUTfrsl7IvzlMDGxXvPWE93cLGG" />
-          <VideoItem name="Beomjune Jang" size="regular" color="mustard" playList="PL9Htg1_aHE0KF7uzMsY_VuT-odtUBuetZ" />
-          <VideoItem name="Yerin Baek" size="regular" color="blue" playList="PLdARt-4U-XHEE6F7f1SLbugwG9JbApzmn" />
-          <VideoItem name="PREP" size="regular" color="jade" playList="PLhxsOjDimOoTXRMEz8RLGX1bX08K9HZGS" />
+          <VideoItem
+            name="Park Hyoshin"
+            size="big"
+            color="red"
+            playList="PLUzSnDUUTfrsl7IvzlMDGxXvPWE93cLGG"
+          />
+          <VideoItem
+            name="Beomjune Jang"
+            size="regular"
+            color="mustard"
+            playList="PL9Htg1_aHE0KF7uzMsY_VuT-odtUBuetZ"
+          />
+          <VideoItem
+            name="Yerin Baek"
+            size="regular"
+            color="blue"
+            playList="PLdARt-4U-XHEE6F7f1SLbugwG9JbApzmn"
+          />
+          <VideoItem
+            name="PREP"
+            size="regular"
+            color="jade"
+            playList="PLhxsOjDimOoTXRMEz8RLGX1bX08K9HZGS"
+          />
         </ul>
       </div>
     </div>
